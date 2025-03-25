@@ -1,0 +1,588 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  line-height: calc(1em + 0.5rem);
+  font-family: "Libre Caslon Text", serif;
+}
+html,
+body {
+  height: 100%;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+/******************************************************************************
+CSS
+******************************************************************************/
+.container {
+  width: 100vw;
+  display: grid;
+  grid-template-rows: 8vh 92vh auto 100vh 100vh;
+  grid-template-areas:
+    "nav"
+    "homePage"
+    "demoPage"
+    "toolsPage"
+"aboutPage"
+    ;
+ 
+}
+
+/******************************************************************************
+nav below
+******************************************************************************/
+
+/* Navigation */
+.nav {
+  grid-area: nav;
+  background: #27444C;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 100px;
+  z-index: 80000;
+  font-family:Arial, Helvetica, sans-serif ;
+}
+.navLogo
+{
+  display:flex;
+  justify-content:center;
+font-size:25px;
+  color:#f2dbd5;
+
+}
+.nav img
+{
+  height:30px;
+}
+.nav button
+{
+  background:#f2dbd5;
+  width:max-content;
+  padding:0px 7px;
+  border:none;
+   border-radius:5px;
+ font-family: Arial, Helvetica, sans-serif;
+ 
+}
+.nav button:hover
+{
+ background:#f4fdf7;
+}
+.nav ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav ul li a {
+  color:#f2dbd5;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.5s, font-size 0.5s;
+ 
+}
+
+.nav ul li a:hover {
+  color: #eeccd9;
+  font-size: 20px;
+}
+
+/* Home Page */
+.homePage {
+  grid-area: homePage;
+  width: 100vw;
+  background: #27444C;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "homeLeft homeRight"
+    ;
+}
+
+.homeRight {
+  grid-area: homeRight;
+  background:#27444C ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.homeRight img {
+  width: auto;
+  height: 400px;
+  border: none;
+}
+
+
+.homeLeft {
+  grid-area: homeLeft;
+  background:  #27444C;
+
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin:auto;
+    
+}
+
+.leftPageContainer
+{
+  height:400px;
+  
+  width:400px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:3fr 2fr 1fr;
+  grid-template-areas:"homeHeader homeHeader"
+    "textBlock textBlock"
+    "getStarted log-in";
+  grid-gap:20px;
+ 
+}
+.homeHeader
+{
+  grid-area:homeHeader;
+  font-family: "Libre Baskerville", serif;
+   color:#f2dbd5;
+  font-size:55px;
+}
+.textBlock
+{
+  grid-area:textBlock;
+  font-size:20px;
+  color:#f2dbd5;
+  font-family: Arial, Helvetica, sans-serif;
+  
+}
+.log-in
+{
+  grid-area:log-in;
+   background:#f2dbd5;
+  border:none;
+   border-radius:10px;
+ font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+    display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-decoration:none;
+  color:  #27444C;
+}
+.getStarted
+{
+  grid-area:getStarted;
+   background:#f2dbd5;
+  border:none;
+  border-radius:10px;
+   font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  
+    display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-decoration:none;
+    color:  #27444C;
+}
+.getStarted:hover
+
+{
+ background:#f4fdf7;
+}
+.log-in:hover
+{
+   background:#f4fdf7;
+}
+
+/*****************************************************
+demoPage below
+******************************************************************************/
+.demoPage {
+   grid-area: demoPage;
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-rows:auto auto;
+  grid-template-areas:"homeContinued" "demoPageContainer";
+}
+.homeContinued
+{
+  grid-area:homeContinued;
+  width:100%;
+  height:100%;
+}
+.homeContinued img
+{
+  width:100%;
+  height:auto;
+}
+.demoPageContainer
+{
+  grid-area:demoPageContainer;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr;
+  grid-template-areas:"demoLeftSide demoRightSide";
+  background:#faf7f7;
+  
+}
+.demoLeftSide
+{
+  grid-area:demoLeftSide;
+   display: flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  margin:auto;
+  
+  
+}
+.demoRightSide
+{
+  grid-area:demoRightSide;
+   display: flex;
+  align-items: center;
+  justify-content: center;
+  background:#faf7f7;
+
+}
+
+.videoContainer {
+  width: 500px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+.demoRightContainer
+{
+  width:500px;
+  height:300px;
+  display: flex;
+  flex-direction:column;
+  align-items: right;
+  justify-content: space-between;
+  background:#faf7f7;
+  
+}
+.demoRightContainer h1
+{
+  font-size:50px;
+  color:#386068;
+}
+
+.demoRightContainer p
+{
+  font-size:20px;
+    color:#386068;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+.demoRightContainer button
+{
+    background:#386068;
+  color:#f2dbd5;
+  border:none;
+  height:50px;
+  border-radius:10px;
+   font-family: Arial, Helvetica, sans-serif;
+}
+.demoRightContainer button:hover
+
+{
+  background:#f2dbd5;
+  color:#386068;
+}
+
+.background-clip {
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
+  z-index: 6;
+}
+/******************************************************************************
+teamPage
+******************************************************************************/
+
+.toolsPage{
+ grid-area:toolsPage;
+  padding-block:20vh;
+  padding-left:15vw;
+  padding-right:15vw;
+  background:pink;
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-rows:1fr 2fr;
+  grid-template-areas:"toolsHeaderDiv"
+    "toolsInfo";
+   background:#faf7f7;
+ 
+}
+.toolsHeaderDiv
+{
+  grid-area:toolsHeaderDiv;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+ 
+  
+}
+.toolsHeaderDiv h1
+{
+  font-size:50px;
+  color:#386068;
+  
+}
+.toolsInfo
+{
+  grid-area:toolsInfo;
+  display:flex;
+   justify-content:space-between;
+  color:#386068;
+   font-family: Arial, Helvetica, sans-serif;
+  
+}
+.tool1, .tool2, .tool3
+{
+  width:200px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.toolsInfo img
+{
+  width:100px;
+  height:100px;
+}
+.tool1Img
+{
+   width:100px;
+  height:100px;
+  background-image:url('https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(13).png?v=1736688862458');
+  background-size: cover;         
+  background-position: center;
+  background-repeat: no-repeat;   
+  transition: background-image 0.3s ease; 
+}
+.tool1:hover .tool1Img {
+  background-image: url('https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(16).png?v=1736689965161');
+}
+
+.tool1:hover p {
+  color: #386068; 
+}
+
+
+.tool2Img
+{
+   width:100px;
+  height:100px;
+  background-image:url('https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(14).png?v=1736688863209');
+  background-size: cover;         
+  background-position: center;
+  background-repeat: no-repeat;   
+  transition: background-image 0.3s ease; 
+}
+.tool2:hover .tool2Img {
+  background-image: url('https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(17).png?v=1736689967965');
+}
+
+.tool2:hover p {
+  color: #386068; 
+}
+
+.tool3Img
+{
+   width:100px;
+  height:100px;
+  background-image:url('https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(15).png?v=1736688864512');
+  background-size: cover;         
+  background-position: center;
+  background-repeat: no-repeat;   
+  transition: background-image 0.3s ease; 
+}
+.tool3:hover .tool3Img {
+  background-image: url('https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(18).png?v=1736689971531');
+}
+
+.tool3:hover p {
+  color: #386068; 
+}
+/*****************************************************
+articlePage below
+*****************************************************************************/
+.aboutPage {
+ grid-area:aboutPage;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:1fr;
+  grid-template-areas:"aboutLeft aboutRight";
+    background:#faf7f7;
+}
+.aboutLeft
+{
+  grid-area:aboutLeft;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  margin:auto;
+}
+.aboutRight
+
+{
+  grid-area:aboutRight;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  margin:auto;
+  
+}
+.aboutLeftContainer
+{
+width:400px;
+  height:400px;
+
+ color:#386068;
+
+} 
+.aboutLeftContainer h1
+{
+  font-size:50px;
+  margin-bottom:20px;
+}
+.aboutLeftContainer p
+{
+   font-family: Arial, Helvetica, sans-serif;
+  font-size:20px;
+}
+.aboutRightContainer
+{
+width:400px;
+  height:400px;
+  background-image:url('https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(19).png?v=1736692033917');
+  background-size: cover;         
+  background-position: center;
+  background-repeat: no-repeat;   
+
+}
+/******************************************************************************
+Footer BElow
+******************************************************************************/
+footer
+{
+
+  background:#27444c;
+
+
+
+}
+
+
+
+.footerTop
+{
+  height:13vh;
+  width:100vw;
+  display:grid;
+  padding-block:1vh;
+  grid-template-rows:repeat(2,1fr);
+  grid-template-areas:
+    "logoGroup"
+    "peopleFooter"
+
+    ;
+}
+
+.peopleFooter
+{
+  grid-area:peopleFooter;
+  width:20vw;
+  height:4vh;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:10px;
+  color:#f2dbd5;
+  
+  
+}
+.logoGroup
+{
+  grid-area:logoGroup;
+  display:flex;
+  justify-content:center;
+  color:#f2dbd5;
+}
+.logoGroup img
+{
+  height:30px;
+}
+.logoGroup h1
+{
+  height:9px;
+  color:red;
+}
+.logoGroup h2
+{
+  height:10px;
+}
+
+
+
+
+.footerDivider
+{
+  height:3vh;
+   width:100vw;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  
+  
+}
+hr
+{
+ height:2px;
+  width:90vw;
+  background:#f2dbd5;
+  border:none;
+   margin:auto;
+}
+.footerBottom
+{
+  color:#f2dbd5;
+  height:9vh;
+   width:100vw;
+ 
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  
+}
+
+
