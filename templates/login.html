@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}"/>
+    <title>Login</title>
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+  <div class="navLogo">
+    <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(20).png?v=1736693562443" alt="pig" />
+    <h3>Pigment</h3>
+  </div>
+  <ul>
+    
+  </ul>
+      
+</div>
+    <div class="mainPage">
+        <div class="mainPageLeft">
+          <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(21).png?v=1737001704773" alt="women with finance"/>
+          <h2>
+            Glad to see you back!
+          </h2>
+        </div>
+       <div class="mainPageRight">
+          <h2>Login</h2>
+    <form action="/login" method="POST">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+        </div>
+       
+      </div>
+    
+  </div>
+    
+</body>
+</html>
