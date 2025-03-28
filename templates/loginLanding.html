@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Linking external CSS file for styling -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/loginLanding.css') }}"/>
 
+    <!-- Font Awesome icons for enhanced UI elements -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       rel="stylesheet"
     />
-    <title>Pigment </title>
+    
+    <title>Pigment</title>
   </head>
   <body>
     <div class="container">
+      
+      <!-- Navigation Bar -->
       <div class="nav">
         <div class="navLogo">
+          <!-- Logo for branding -->
           <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(20).png?v=1736693562443" alt="pig" />
           <h3>Pigment</h3>
         </div>
+        
+        <!-- Navigation Menu -->
         <ul>
           <li>
             <a href="/loginLanding">
@@ -29,7 +37,6 @@
               <span>Budgeting</span>
             </a>
           </li>
-         
           <li>
             <a href="/">
              <i class="fa-solid fa-coins"></i>
@@ -45,54 +52,66 @@
         </ul>
       </div>
    
-     <div class="homePage">
-  <div class="homeLeft">
-    <div class="homeLeftContainer">
-      <h1 class="homeHeader">Welcome 
-to Pigment - The personal finance service</h1>
-      <p class="textBlock">
-        We are committed to helping students from all walks of life take charge of their personal finances and build a foundation for a secure future. Managing money as a student can be challenging, with the demands of tuition, daily expenses, and savings goals. That’s why we provide the tools and resources to make budgeting, tracking expenses, and planning for the future simple and stress-free. Our mission is to equip students with the financial skills they need to thrive today and achieve their dreams tomorrow.
-      </p>
-    </div>
-  </div>
-  <div class="homeRight">
-    <div class="homeRightContainer">
-      <button class="button1">
-        <i class="fa-solid fa-table"></i>
-        <h3>Tracking Tool</h3>
-      </button>
-      <button class="button2">
-        <i class="fa-solid fa-chart-pie"></i>
-        <h3>Budgeting Tool</h3>
-      </button>
-      <button class="button3">
-        <i class="fa-regular fa-calendar-days"></i>
-        <h3>Reports [&] History</h3>
-      </button>
-      <button class="button4">
-        <i class="fa-light fa-clipboard-question"></i>
-        <h3>Inquiries [&] Assistance</h3>
-      </button>
-    </div>
-  </div>
-</div>
+      <!-- Main Content Section -->
+      <div class="homePage">
+        
+        <!-- Left Section: Introduction & Mission Statement -->
+        <div class="homeLeft">
+          <div class="homeLeftContainer">
+            <h1 class="homeHeader">
+              Welcome to Pigment - The Personal Finance Service
+            </h1>
+            <p class="textBlock">
+              We are committed to helping students from all walks of life take charge of their personal finances and build a foundation for a secure future. Managing money as a student can be challenging, with the demands of tuition, daily expenses, and savings goals. That’s why we provide the tools and resources to make budgeting, tracking expenses, and planning for the future simple and stress-free. Our mission is to equip students with the financial skills they need to thrive today and achieve their dreams tomorrow.
+            </p>
+          </div>
+        </div>
 
+        <!-- Right Section: Features & Tools -->
+        <div class="homeRight">
+          <div class="homeRightContainer">
+            
+            <!-- Tracking Tool Button -->
+            <button class="button1">
+              <i class="fa-solid fa-table"></i>
+              <h3>Tracking Tool</h3>
+            </button>
+            
+            <!-- Budgeting Tool Button -->
+            <button class="button2">
+              <i class="fa-solid fa-chart-pie"></i>
+              <h3>Budgeting Tool</h3>
+            </button>
+
+            <!-- Reports & History Button -->
+            <button class="button3">
+              <i class="fa-regular fa-calendar-days"></i>
+              <h3>Reports [&] History</h3>
+            </button>
+
+            <!-- Inquiries & Assistance Button -->
+            <button class="button4">
+              <i class="fa-light fa-clipboard-question"></i>
+              <h3>Inquiries [&] Assistance</h3>
+            </button>
+
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Footer Section -->
     <footer>
       <div class="footerTop">
-       <div class="logoGroup">
-        <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(20).png?v=1736693562443"/>
-         <h2>
-           Pigement
-         </h2>
-         <h2>
-           -Personal Finance
-         </h2>
-         
+        
+        <!-- Footer Branding with Logo -->
+        <div class="logoGroup">
+          <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(20).png?v=1736693562443"/>
+          <h2>Pigment</h2>
+          <h2>- Personal Finance</h2>
         </div>
-       
 
+        <!-- Team Members -->
         <div class="peopleFooter">
           <div>Hansuja Yalaverthi</div>
           <div>|</div>
@@ -101,9 +120,13 @@ to Pigment - The personal finance service</h1>
           <div>Grace Gong</div>
         </div>
       </div>
+
+      <!-- Divider for Footer -->
       <div class="footerDivider">
         <hr />
       </div>
+
+      <!-- Footer Bottom Section -->
       <div class="footerBottom">
         <h3>1 Stevenson Dr, Lincolnshire, IL 60069</h3>
         <h6>@ Kitchen Coders | All Rights Reserved</h6>
