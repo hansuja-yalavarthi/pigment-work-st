@@ -1,0 +1,156 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    line-height: calc(1em + 0.5rem);
+    font-family: "Libre Caslon Text", serif;
+}
+
+html, body {
+    height: 100%;
+    background: #f2dbd5;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+input, button, textarea, select {
+    font: inherit;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Container */
+.container {
+    width: 100vw;
+    display: grid;
+    grid-template-rows: 8vh 92vh;
+    grid-template-areas:
+        "nav"
+        "mainPage";
+    background: #f2dbd5;
+}
+
+/* Navigation */
+.nav {
+    grid-area: nav;
+    background: #f2dbd5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 100px;
+}
+
+.navLogo {
+    display: flex;
+    justify-content: center;
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.nav img {
+    height: 30px;
+}
+
+/* Main Page */
+.mainPage {
+    grid-area: mainPage;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    background: #faf7f7;
+    padding: 20px;
+    background: #f2dbd5;
+}
+
+/* Left Side */
+.mainPageLeft {
+    background-color: #f2dbd5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Added shadow */
+}
+
+.mainPageLeft img {
+    max-width: 50%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.mainPageLeft h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Right Side */
+.mainPageRight {
+    background-color: #faf7f7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #f2dbd5;
+}
+
+.mainPageRight h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #27444c;
+}
+
+.mainPageRight form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.mainPageRight label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #27444c;
+}
+
+.mainPageRight input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #f2dbd5;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.mainPageRight button {
+    padding: 10px 20px;
+    background-color: #f2dbd5;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.mainPageRight button:hover {
+    background-color: #e6c5c0;
+}
+
+.mainPageRight p {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #27444c;
+}
+
+.mainPageRight a {
+    color: #27444c;
+    text-decorati
+}
