@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}"/>
     <title>Lesson</title>
+    
+    <!-- Font Awesome for icons -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
       rel="stylesheet"
@@ -25,14 +28,13 @@
           </li>
           <li>
             <a href="/budgeting">
-             <i class="fa-solid fa-chart-pie"></i>
+              <i class="fa-solid fa-chart-pie"></i>
               <span>Budgeting</span>
             </a>
           </li>
-         
           <li>
             <a href="/">
-             <i class="fa-solid fa-coins"></i>
+              <i class="fa-solid fa-coins"></i>
               <span>Transaction</span>
             </a>
           </li>
@@ -50,18 +52,21 @@
         Contact Us
       </div>
 
-      <!-- Form Area -->
+      <!-- Contact Form Area -->
       <div class="formArea">
         <form 
           method="POST" 
           action="https://script.google.com/macros/s/AKfycbzmxI_8uelftFFhKjkGpwrVO2jQ1ixjSp0JW2RE92_VIgx8udFPYBnVSNm1cYQogDmn/exec"
         >
+          <!-- Name Input -->
           <label for="Name">Name:</label>
           <input name="Name" type="text" placeholder="Name" required />
 
+          <!-- Email Input -->
           <label for="Email">Email:</label>
           <input name="Email" type="email" placeholder="Email" required />
 
+          <!-- Issue Type Selection -->
           <label for="Issue Type">Issue Type:</label>
           <select name="Issue Type" required>
             <option value="Website Malfunction">Website Malfunction</option>
@@ -69,30 +74,26 @@
             <option value="Other">Other</option>
           </select>
 
+          <!-- Problem Description Textarea -->
           <label for="Problem Description">Problem Description:</label>
           <textarea name="Problem Description" placeholder="Describe your issue" required></textarea>
 
+          <!-- Submit Button -->
           <button type="submit">Send</button>
         </form>
       </div>
     </div>
 
     <!-- Footer -->
-    
     <footer>
       <div class="footerTop">
-       <div class="logoGroup">
-        <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(20).png?v=1736693562443"/>
-         <h2>
-           Pigement
-         </h2>
-         <h2>
-           -Personal Finance
-         </h2>
-         
+        <div class="logoGroup">
+          <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(20).png?v=1736693562443"/>
+          <h2>Pigment</h2>
+          <h2>- Personal Finance</h2>
         </div>
-       
-
+        
+        <!-- Contributors Section -->
         <div class="peopleFooter">
           <div>Hansuja Yalaverthi</div>
           <div>|</div>
@@ -101,14 +102,17 @@
           <div>Grace Gong</div>
         </div>
       </div>
+      
+      <!-- Footer Divider -->
       <div class="footerDivider">
         <hr />
       </div>
+      
+      <!-- Footer Bottom Section -->
       <div class="footerBottom">
         <h3>1 Stevenson Dr, Lincolnshire, IL 60069</h3>
         <h6>@ Kitchen Coders | All Rights Reserved</h6>
       </div>
     </footer>
-   
   </body>
 </html>
