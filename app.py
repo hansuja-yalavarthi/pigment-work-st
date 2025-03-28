@@ -15,45 +15,38 @@ app = Flask(__name__)
 
 # ------------------------------- Database Initialization -------------------------------
 def init_db():
-    """
-    Initializes the SQLite database and creates tables if they do not already exist.
-    Tables:
-    - transactions: Stores income and expenses with details.
-    - budgets: Stores budget limits for specific categories.
-    - savings_goals: Tracks savings goals with target amounts and progress.
-    """
     conn = sqlite3.connect('finances.db')
     c = conn.cursor()
 
-    # Creating Transactions table
+    # Transactions table: Logs income and expenses with details.
     c.execute('''
         CREATE TABLE IF NOT EXISTS transactions (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            type TEXT NOT NULL, -- Income or Expense
-            category TEXT NOT NULL, -- Category for transaction
-            amount REAL NOT NULL, -- Amount of transaction
-            date TEXT NOT NULL, -- Date of transaction
-            description TEXT -- Optional description
+            type TEXT NOT NULL,
+            category TEXT NOT NULL,
+            amount REAL NOT NULL,
+            date TEXT NOT NULL,
+            description TEXT
         )
     ''')
 
-    # Creating Budget table
+    # Budget table: Stores budget limits for specific categories.
     c.execute('''
         CREATE TABLE IF NOT EXISTS budgets (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            category TEXT NOT NULL, -- Category name
-            budget_limit REAL NOT NULL -- Limit set for that category
+            category TEXT NOT NULL,
+            budget_limit REAL NOT NULL
         )
     ''')
 
-    # Creating Savings Goals table
+    # Savings Goals table: tracks savings goals with target amounts and progress.
     c.execute('''
         CREATE TABLE IF NOT EXISTS savings_goals (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            goal_name TEXT NOT NULL, -- Name of the savings goal
-            target_amount REAL NOT NULL, -- Goal amount
-            current_savings REAL NOT NULL, -- Current saved amount
-            due_date TEXT -- Optional due date for goal
+            goal_name TEXT NOT NULL,
+            target_amount REAL NOT NULL,
+            current_savings REAL NOT NULL,
+            due_date TEXT
         )
     ''')
 
@@ -61,27 +54,19 @@ def init_db():
     conn.close()
 
 # ------------------------------- Routes -------------------------------
-
 @app.after_request
 def add_cors_headers(response):
-    """
-    Adds CORS headers to allow cross-origin requests.
-    Allows frontend applications to interact with this backend.
-    """
+    """Add CORS headers to allow cross-origin requests."""
     response.headers['Access-Control-Allow-Origin'] = '*'
     response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     return response
 
 @app.route('/api/budgets')
 def get_budgets():
-    """
-    API endpoint to fetch budget details.
-    Calculates the total spent in each category and returns the remaining budget.
-    """
+    """Retrieve budget details, including remaining budget per category."""
     conn = sqlite3.connect('finances.db')
     c = conn.cursor()
 
-    # Retrieve all budgets
     c.execute("SELECT * FROM budgets")
     budgets_data = c.fetchall()
 
@@ -89,12 +74,9 @@ def get_budgets():
     for budget in budgets_data:
         category = budget[1]
         limit = budget[2]
-
-        # Calculate total spent in each category
         c.execute("SELECT SUM(amount) FROM transactions WHERE type='expense' AND category=?", (category,))
-        spent = c.fetchone()[0] or 0  # Handle NULL values
-        remaining = limit - spent  # Calculate remaining budget
-
+        spent = c.fetchone()[0] or 0
+        remaining = limit - spent
         budgets.append({
             'category': category,
             'limit': limit,
@@ -107,30 +89,23 @@ def get_budgets():
 
 @app.route('/')
 def index():
-    """
-    Main dashboard displaying all transactions, total income, expenses, and balance.
-    """
+    """Render the homepage with transaction details and financial summary."""
     conn = sqlite3.connect('finances.db')
     c = conn.cursor()
-
     # Fetch all transactions
     c.execute("SELECT * FROM transactions")
     transactions = c.fetchall()
 
-    # Calculate total income
+    # Calculate total income and expenses
     c.execute("SELECT SUM(amount) FROM transactions WHERE type='income'")
     total_income = c.fetchone()[0] or 0
-
-    # Calculate total expenses
     c.execute("SELECT SUM(amount) FROM transactions WHERE type='expense'")
     total_expense = c.fetchone()[0] or 0
-
-    # Calculate current balance
     current_balance = total_income - total_expense
 
     conn.close()
 
-    # Sample budget categories for frontend display
+    # Default budget categories
     budgets = {
         'food': 500,
         'salary': 0,  # No limit for income
@@ -138,13 +113,13 @@ def index():
         'rent': 1000,
     }
     return render_template('index.html', transactions=transactions, balance=current_balance, income=total_income, expense=total_expense, budgets_json=json.dumps(budgets))
+    #return render_template('index.html', transactions=transactions, balance=current_balance, income=total_income, expense=total_expense)
+
+
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_transaction():
-    """
-    Handles adding a new transaction.
-    If the request is AJAX, return JSON response; otherwise, redirect to index.
-    """
+    """Add a new financial transaction."""
     if request.method == 'POST':
         # Retrieve form data
         transaction_type = request.form['type']
@@ -161,14 +136,50 @@ def add_transaction():
                   (transaction_type, category, amount, date, description))
         conn.commit()
         conn.close()
+        #return redirect(url_for('index'))
 
-        # Return JSON response if AJAX request, otherwise redirect
+        # Return success response for AJAX requests, otherwise redirect to home page
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return jsonify(success=True)
         else:
             return redirect(url_for('index'))
 
     return render_template('add.html')
+
+@app.route('/edit_transaction', methods=['POST'])
+def edit_transaction():
+    """Edit an existing transaction based on user input."""
+    # Get form data
+    """
+    Route for editing an existing transaction.
+    Accepts updated transaction data via POST request.
+    """
+    transaction_id = request.form['transaction_id']
+    transaction_type = request.form['type']
+    category = request.form['category']
+    amount = request.form['amount']
+    date = request.form['date']
+    description = request.form['description']
+
+    # Connect to the database and update the transaction
+    conn = sqlite3.connect('finances.db')
+    c = conn.cursor()
+
+    # Update the transaction in the database
+    c.execute('''UPDATE transactions
+                 SET type = ?, category = ?, amount = ?, date = ?, description = ?
+                 WHERE id = ?''', 
+              (transaction_type, category, amount, date, description, transaction_id))
+    
+    conn.commit()
+
+    # Check if the update was successful
+    if c.rowcount > 0:
+        conn.close()
+        return jsonify({'success': True})
+    else:
+        conn.close()
+        return jsonify({'success': False, 'message': 'Transaction not found'})
 
 @app.route('/delete/<int:transaction_id>', methods=['DELETE'])
 def delete_transaction(transaction_id):
@@ -181,12 +192,48 @@ def delete_transaction(transaction_id):
     c.execute("DELETE FROM transactions WHERE id=?", (transaction_id,))
     conn.commit()
 
-    if c.rowcount > 0:  # Check if deletion was successful
+    if c.rowcount > 0: # Success check
         conn.close()
         return jsonify({'success': True})
     else:
         conn.close()
         return jsonify({'success': False, 'error': 'Transaction not found'}), 404
+
+@app.route('/transaction/<int:transaction_id>')
+def get_transaction_details(transaction_id):
+    """
+    Retrieves details of a specific transaction by its ID.
+
+    Args:
+        transaction_id (int): The unique ID of the transaction to retrieve.
+
+    Returns:
+        JSON response containing the transaction details if found, 
+        otherwise a JSON error message with a 404 status.
+    """
+    # Connect to the database
+    conn = sqlite3.connect('finances.db')
+    c = conn.cursor()
+
+    # Query the database for the transaction with the given ID
+    c.execute("SELECT * FROM transactions WHERE id=?", (transaction_id,))
+    transaction = c.fetchone()
+    # Close the database connection
+    conn.close()
+
+    # If the transaction exists, return its details as a JSON response
+    if transaction:
+        return jsonify({
+            'id': transaction[0],
+            'type': transaction[1],
+            'category': transaction[2],
+            'amount': transaction[3],
+            'date': transaction[4],
+            'description': transaction[5]
+        })
+    else:
+        # Return an error response if the transaction is not found
+        return jsonify({'error': 'Transaction not found'}), 404
 
 @app.route('/export/csv')
 def export_csv():
@@ -211,7 +258,81 @@ def export_csv():
         'Content-Disposition': 'attachment;filename=transactions.csv'
     })
 
-# ------------------------------- User Authentication -------------------------------
+
+@app.route('/export/pdf')
+def export_pdf():
+    """Generate a PDF report of all transactions."""
+    conn = sqlite3.connect('finances.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM transactions")
+    transactions = c.fetchall()
+    conn.close()
+
+    buffer = BytesIO()
+    c = canvas.Canvas(buffer, pagesize=letter)
+    c.drawString(100, 750, "Transactions Report")
+    c.drawString(50, 730, "ID    Type    Category    Amount    Date    Description")
+
+    y = 710
+    for t in transactions:
+        c.drawString(50, y, f"{t[0]}  {t[1]}  {t[2]}  ${t[3]}  {t[4]}  {t[5]}")
+        y -= 20
+        if y < 50:  # New page if content exceeds
+            c.showPage()
+            y = 750
+
+    c.save()
+    buffer.seek(0)
+    return send_file(buffer, as_attachment=True, download_name="transactions.pdf", mimetype='application/pdf')
+
+@app.route('/budgeting', methods=['GET', 'POST'])
+def budgeting():
+    if request.method == 'POST':
+        # Handle adding a new budget category
+        if 'category' in request.form and 'budget_limit' in request.form:
+            category = request.form['category']
+            budget_limit = float(request.form['budget_limit'])
+
+            conn = sqlite3.connect('finances.db')
+            c = conn.cursor()
+            c.execute('''INSERT INTO budgets (category, budget_limit) VALUES (?, ?)''', 
+                      (category, budget_limit))
+            conn.commit()
+            conn.close()
+        
+        # Handle adding a new savings goal
+        if 'goal_name' in request.form and 'target_amount' in request.form and 'current_savings' in request.form:
+            goal_name = request.form['goal_name']
+            target_amount = float(request.form['target_amount'])
+            current_savings = float(request.form['current_savings'])
+            due_date = request.form['due_date']
+
+            conn = sqlite3.connect('finances.db')
+            c = conn.cursor()
+            c.execute('''INSERT INTO savings_goals (goal_name, target_amount, current_savings, due_date)
+                         VALUES (?, ?, ?, ?)''', 
+                      (goal_name, target_amount, current_savings, due_date))
+            conn.commit()
+            conn.close()
+
+        return redirect(url_for('budgeting'))
+
+    # Retrieve current budgets and savings goals
+    conn = sqlite3.connect('finances.db')
+    c = conn.cursor()
+
+    # Get budgets
+    c.execute("SELECT * FROM budgets")
+    budgets = c.fetchall()
+
+    # Get savings goals
+    c.execute("SELECT * FROM savings_goals")
+    goals = c.fetchall()
+
+    conn.close()
+
+    return render_template('budgeting.html', budgets=budgets, goals=goals)
+
 # Setup secret key and database URI
 app.config['SECRET_KEY'] = 'your_secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
@@ -224,13 +345,6 @@ login_manager.login_view = "login"
 
 # User model
 class User(UserMixin, db.Model):
-    """
-    User model for authentication.
-    Fields:
-    - id: Unique user ID.
-    - username: Unique username.
-    - password: Hashed password.
-    """
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
@@ -239,7 +353,87 @@ class User(UserMixin, db.Model):
 with app.app_context():
     db.create_all()
 
-# ------------------------------- Run Application -------------------------------
-if __name__ == '__main__':
-    init_db()  # Ensure database is initialized
-    app.run(debug=True)  # Start Flask application
+# Route for Home Page (Login Required)
+@app.route('/loginLanding')
+@login_required
+def home():
+    # You can add other logic related to budgeting, savings, etc.
+    return render_template('loginLanding.html')
+
+# Route for Login
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        user = User.query.filter_by(username=username).first()
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            return redirect(url_for('home'))
+        else:
+            flash('Login unsuccessful. Please check your username and password', 'danger')
+    return render_template('login.html')
+
+# Route for Signup
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        hashed_password = generate_password_hash(password)  # Using the default pbkdf2_sha256
+
+        if User.query.filter_by(username=username).first():
+            flash('Username already exists. Please choose a different one.', 'danger')
+            return redirect(url_for('signup'))
+
+        new_user = User(username=username, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+
+        flash('Signup successful! You can now login.', 'success')
+        return redirect(url_for('login'))
+    
+    return render_template('signup.html')
+
+# Route for Logout
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+@app.route('/signupLanding')
+def signup_landing():
+    return render_template('signupLanding.html')
+
+@app.route('/loginLanding')
+def login_landing():
+    return render_template('loginLanding.html')
+
+
+"""@app.route('/login')
+def login():
+    return render_template('login.html')"""
+
+"""
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')"""
+
+@app.route('/contact')
+def contact_page():
+    return render_template('contact.html')
+
+@app.route('/home')
+def home_page():
+    return render_template('home.html')
+
+# Load user function for Flask-Login
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+if __name__ == "__main__":
+    init_db()
+    app.run(debug=True)
