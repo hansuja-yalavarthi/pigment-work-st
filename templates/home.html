@@ -1,71 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <!--<head>
-    <link rel="stylesheet" href= "{{ url_for('static', filename='css/style.css') }} />
-    <title>KnowYourWorth</title>
-  </head>-->
-
   <head>
+    <!-- Link to external CSS stylesheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
-    <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    rel="stylesheet"
-    />
+    
+    <!-- Link to FontAwesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
   </head>
 
   <body>
     <div class="container">
+      <!-- Navigation Bar -->
       <div class="nav">
         <div class="navLogo">
           <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(20).png?v=1736693562443" alt="pig"/>
-          <h3>
-            Pigment
-          </h3>
+          <h3>Pigment</h3>
         </div>
         <ul>
-          <li class="about">
-            <a href="#about">About</a>
-          </li>
-          <li class="contact">
-            <a href="/contact">Contact</a>
-          </li>
-          <li><a href="/signup"><button class="logInButton">
-             Sign-Up
-          
-        </button></a></li>
-            <li><a href="/login"><button class="logInButton">
-               Log-In
-       
-        </button></a></li>
+          <li class="about"><a href="#about">About</a></li>
+          <li class="contact"><a href="/contact">Contact</a></li>
+          <li><a href="/signup"><button class="logInButton">Sign-Up</button></a></li>
+          <li><a href="/login"><button class="logInButton">Log-In</button></a></li>
         </ul>
-        
       </div>
+
+      <!-- Home Page Section -->
       <div class="homePage">
         <div class="homeLeft">
           <div class="leftPageContainer">
             <h1 class="homeHeader">Pigment Personal Finance Service</h1>
             <p class="textBlock">
-              Got it! Here's a version focused solely on students and personal finance:  
-
-              **"We take pride in helping students and individuals from all walks of life achieve the financial peace they deserve."**  
-              
+              "We take pride in helping students and individuals from all walks of life achieve the financial peace they deserve."
             </p>
-            <a href="/signup"  class="getStarted homeButtons">  Get Started</a>
-            <a href="/login" class="log-in homeButtons">  Log-In</a>
+            <a href="/signup" class="getStarted homeButtons">Get Started</a>
+            <a href="/login" class="log-in homeButtons">Log-In</a>
           </div>
         </div>
         <div class="homeRight">
-          <img
-            src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(11).png?v=1736623958507"
-            alt="women siting at desk managing finances"
-          />
+          <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(11).png?v=1736623958507" alt="woman sitting at desk managing finances"/>
         </div>
       </div>
+
+      <!-- Demo Section -->
       <div class="demoPage">
         <div class="homeContinued">
-          <img
-            src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(12).png?v=1736631725063"
-          />
+          <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(12).png?v=1736631725063"/>
         </div>
         <div class="demoPageContainer">
           <div class="demoLeftSide">
@@ -75,95 +54,59 @@
               </video>
             </div>
           </div>
-          
           <div class="demoRightSide">
             <div class="demoRightContainer">
-               <h1>Try the demo</h1>
-            <p>Tracker Tool Demo Videor. Add some other words about the tracker to seal the deal</p>
-            <button id="playButton" class="videoButton">Click to Start</button>
+              <h1>Try the demo</h1>
+              <p>Tracker Tool Demo Video. Add some other words about the tracker to seal the deal.</p>
+              <button id="playButton" class="videoButton">Click to Start</button>
             </div>
-           
           </div>
         </div>
       </div>
+
+      <!-- Tools Section -->
       <div class="toolsPage">
         <div class="toolsHeaderDiv">
-          <h1>
-          Struggling to manage finances?
-          </h1>
+          <h1>Struggling to manage finances?</h1>
         </div>
         <div class="toolsInfo">
           <div class="tool1">
-            <div class="tool1Img">
-               
-            </div>
-           
-           <p>
-            Porkfolio - A comprehensive compilation of your budgets, goals, and spending patterns.
-            </p>
-            
+            <p>Porkfolio - A comprehensive compilation of your budgets, goals, and spending patterns.</p>
           </div>
           <div class="tool2">
-            <div class="tool2Img">
-               
-            </div>
-           <p>
-            CSV & PDF Converter: View and manage your data in the format that works best for you.
-            </p>
-            
+            <p>CSV & PDF Converter: View and manage your data in the format that works best for you.</p>
           </div>
           <div class="tool3">
-              <div class="tool3Img">
-               
-            </div>
-           <p>
-            Expense Tracker: Organize your expenses and income while easily locating specific transactions.
-            </p>
-            
+            <p>Expense Tracker: Organize your expenses and income while easily locating specific transactions.</p>
           </div>
-          
         </div>
       </div>
+
+      <!-- About Section -->
       <div class="aboutPage" id="about">
-          <div class="aboutLeft">
+        <div class="aboutLeft">
           <div class="aboutLeftContainer">
-              <h1>
-            About Us
-          </h1>
-          <p>
-            At Pigment, our mission is to empower students to take control of their personal finances.  
-            <br/>  
-            We understand that managing money can feel overwhelming. That’s why we’ve created a platform designed to simplify budgeting, track expenses, and set meaningful financial goals.  
-            <br/>  
-            By providing accessible tools and resources, we aim to help students build healthy financial habits that last a lifetime. Whether you're saving for tuition, planning a trip, or just trying to stay on top of your spending, we're here to guide you every step of the way.    </p>
+            <h1>About Us</h1>
+            <p>
+              At Pigment, our mission is to empower students to take control of their personal finances. <br/>
+              We understand that managing money can feel overwhelming. That’s why we’ve created a platform designed to simplify budgeting, track expenses, and set meaningful financial goals. <br/>
+              By providing accessible tools and resources, we aim to help students build healthy financial habits that last a lifetime. Whether you're saving for tuition, planning a trip, or just trying to stay on top of your spending, we're here to guide you every step of the way.
+            </p>
           </div>
-    
         </div>
         <div class="aboutRight">
-          <div class="aboutRightContainer">
-           
-          </div>
-         
+          <div class="aboutRightContainer"></div>
         </div>
-      
-        
       </div>
     </div>
 
+    <!-- Footer Section -->
     <footer>
       <div class="footerTop">
-       <div class="logoGroup">
-        <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(20).png?v=1736693562443"/>
-         <h2>
-           Pigement
-         </h2>
-         <h2>
-           -Personal Finance
-         </h2>
-         
+        <div class="logoGroup">
+          <img src="https://cdn.glitch.global/ee3824e1-08b7-4d8e-b8e7-dfe1553e478d/Untitled%20design%20(20).png?v=1736693562443"/>
+          <h2>Pigment - Personal Finance</h2>
         </div>
-       
-
         <div class="peopleFooter">
           <div>Hansuja Yalaverthi</div>
           <div>|</div>
@@ -172,31 +115,29 @@
           <div>Grace Gong</div>
         </div>
       </div>
-      <div class="footerDivider">
-        <hr />
-      </div>
+      <div class="footerDivider"><hr/></div>
       <div class="footerBottom">
         <h3>1 Stevenson Dr, Lincolnshire, IL 60069</h3>
         <h6>@ Kitchen Coders | All Rights Reserved</h6>
       </div>
     </footer>
 
+    <!-- JavaScript for Video Playback -->
     <script>
-     window.addEventListener("load", function () {
-  const video = document.getElementById("backgroundVideo");
-  const playButton = document.getElementById("playButton");
+      window.addEventListener("load", function () {
+        const video = document.getElementById("backgroundVideo");
+        const playButton = document.getElementById("playButton");
 
-  playButton.addEventListener("click", function () {
-    if (video.paused) {
-      video.play();
-      playButton.textContent = "Pause Video";  // Update text when video plays
-    } else {
-      video.pause();
-      playButton.textContent = "Play Video";  // Update text when video pauses
-    }
-  });
-});
-
+        playButton.addEventListener("click", function () {
+          if (video.paused) {
+            video.play();
+            playButton.textContent = "Pause Video";
+          } else {
+            video.pause();
+            playButton.textContent = "Play Video";
+          }
+        });
+      });
     </script>
   </body>
 </html>
